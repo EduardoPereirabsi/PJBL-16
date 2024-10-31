@@ -1,5 +1,8 @@
 public class Main {
     public static void main(String[] args) throws Exception {
+       var arqFuncionario = new LeituraArquivo();
+        arqFuncionario.lerArquivoFuncionario("C:\\dadosFuncionario.txt");
+
         Cliente cliente1 = new Cliente("João Silva", "123.456.789-00", "Rua A, 123", "99999-9999", 150);
         Vendedor vendedor1 = new Vendedor("Carlos Santos", "111.222.333-44", "Rua C, 789", 5.5, 20, "98888-8888");
 
@@ -17,7 +20,7 @@ public class Main {
         carro1.mostrarInfo();
         moto1.mostrarInfo();
 
-        if (!carro1.isDisponivelParaVenda()){
+        if (!carro1.isDisponivelParaVenda()) {
             throw new VeiculoException("Veículo indisponivel para a venda!");
         }
     }
