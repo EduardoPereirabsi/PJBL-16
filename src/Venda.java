@@ -54,6 +54,7 @@ public class Venda {
     public void setDataVenda(Date dataVenda) {
         this.dataVenda = dataVenda;
     }
+
     public void mostrarVenda() {
         System.out.println("Vendedor: " + vendedor.getNome());
         System.out.println("Cliente: " + cliente.getNome());

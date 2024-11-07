@@ -1,6 +1,10 @@
 public class Cliente extends Usuario {
     private int pontosFidelidade;
 
+    public Cliente() {
+        super();
+    }
+
     public Cliente(String nome, String cpf, String endereco,String telefone, int pontosFidelidade) {
         super(nome, cpf, endereco, telefone);
         this.pontosFidelidade = pontosFidelidade;
