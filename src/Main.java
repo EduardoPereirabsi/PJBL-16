@@ -1,15 +1,26 @@
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Main {
     public static void main(String[] args) throws Exception {
-       var arqFuncionario = new LeituraArquivo();
-        arqFuncionario.lerArquivoFuncionario("C:\\dadosFuncionario.txt");
+        LeituraArquivo arqVendedor = new LeituraArquivo();
+        ArrayList<Vendedor> vendedores = arqVendedor.lerArquivoVendedor("C:\\Users\\Gp\\DadosVendedor.txt");
+
+
+        LeituraArquivo arqGerente = new LeituraArquivo();
+        arqGerente.lerArquivoGerente("C:\\Users\\Gp\\DadosGerente.txt");
 
         Cliente cliente1 = new Cliente("João Silva", "123.456.789-00", "Rua A, 123", "99999-9999", 150);
         Vendedor vendedor1 = new Vendedor("Carlos Santos", "111.222.333-44", "Rua C, 789", 5.5, 20, "98888-8888");
 
-        Carro carro1 = new Carro("Toyota", "Corolla", 95000.00, 2021, false, 4, true);
-        Moto moto1 = new Moto("Honda", "CB 500", 30000.00, 2022, true, "Esportiva", true);
+        Veiculo carro1 = new Carro("Toyota", "Corolla", 95000.00, 2021, true, 4, true);
+        Veiculo moto1 = new Moto("Honda", "CB 500", 30000.00, 2022, true, "Esportiva", true);
 
-        System.out.println("Informações dos Usuários:");
+        Venda venda1 = new Venda(vendedor1, cliente1, carro1, carro1.getPreco(), new Date());
+
+        venda1.mostrarVenda();
+
+        System.out.println("\nInformações dos Usuários:");
         cliente1.mostrarInfo();
         vendedor1.mostrarInfo();
 
@@ -20,8 +31,9 @@ public class Main {
         carro1.mostrarInfo();
         moto1.mostrarInfo();
 
+
         if (!carro1.isDisponivelParaVenda()) {
-            throw new VeiculoException("Veículo indisponivel para a venda!");
+            throw new VeiculoIndisponivelException("Veículo indisponivel para a venda!");
         }
     }
 }

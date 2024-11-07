@@ -4,6 +4,8 @@ public abstract class Usuario {
     private String endereco;
     private String telefone;
 
+    public Usuario() {}
+
     public Usuario(String nome, String cpf, String endereco, String telefone) {
         this.nome = nome;
         this.cpf = cpf;
