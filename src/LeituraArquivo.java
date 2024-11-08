@@ -27,19 +27,18 @@ public class LeituraArquivo {
                 }
             }
             return vendedores;
-
         } catch (Exception e) {
-            System.err.println("Erro ao ler o arquivo: " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
-    public void lerArquivoGerente(String caminhoArquivo) {
+    public ArrayList<Gerente> lerArquivoGerente(String caminhoArquivo) {
         try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
             String linha;
 
             ArrayList<Gerente> gerentes = new ArrayList<Gerente>();
 
             while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split("\|");
+                String[] dados = linha.split("\\|");
 
                 if (dados.length == 5) {
                     Gerente gerente = new Gerente();
@@ -54,20 +53,21 @@ public class LeituraArquivo {
                     System.out.println("Dados incompletos na linha: " + linha);
                 }
             }
-
+            return gerentes;
         } catch (Exception e) {
-            System.err.println("Erro ao ler o arquivo: " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
-    public void lerArquivoCliente(String caminhoArquivo) {
+    public ArrayList<Cliente> lerArquivoCliente(String caminhoArquivo) {
         try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
             String linha;
 
             ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 
             while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split("\|");
+
+                String[] dados = linha.split("\\|");
 
                 if (dados.length == 4) {
                     Cliente cliente = new Cliente();
@@ -81,8 +81,64 @@ public class LeituraArquivo {
                     System.out.println("Dados incompletos na linha: " + linha);
                 }
             }
-
+            return clientes;
         } catch (Exception e) {
-            System.err.println("Erro ao ler o arquivo: " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
+    public ArrayList<Carro> lerArquivoCarro(String caminhoArquivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
+            String linha;
+
+            ArrayList<Carro> carros = new ArrayList<Carro>();
+
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split("\\|");
+
+                if (dados.length == 6) {
+                    Carro carro = new Carro();
+                    carro.setMarca(dados[0]);
+                    carro.setModelo(dados[1]);
+                    carro.setPreco(Double.parseDouble(dados[2]));
+                    carro.setAno(Integer.parseInt(dados[3]));
+                    carro.setNumeroPortas(4);
+                    // carro.setTemArCondicionado(5);
+                    carros.add(carro);
+
+                } else {
+                    System.out.println("Dados incompletos na linha: " + linha);
+                }
+            }
+            return carros;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public ArrayList<Moto> lerArquivoMoto(String caminhoArquivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
+            String linha;
+
+            ArrayList<Moto> motos = new ArrayList<Moto>();
+
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split("\\|");
+
+                if (dados.length == 5) {
+                    Moto moto = new Moto();
+                    moto.setMarca(dados[0]);
+                    moto.setModelo(dados[1]);
+                    moto.setPreco(Double.parseDouble(dados[2]));
+                    moto.setAno(Integer.parseInt(dados[3]));
+                    //   moto.setTemABS(4);
+                    motos.add(moto);
+
+                } else {
+                    System.out.println("Dados incompletos na linha: " + linha);
+                }
+            }
+            return motos;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+}

@@ -3,14 +3,16 @@ import java.util.Date;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        LeituraArquivo arqVendedor = new LeituraArquivo();
-        ArrayList<Vendedor> vendedores = arqVendedor.lerArquivoVendedor("C:\\DadosVendedor.txt");
+        LeituraArquivo leituraArquivo = new LeituraArquivo();
+        ArrayList<Vendedor> vendedores = leituraArquivo.lerArquivoVendedor("C:\\DadosVendedor.txt");
 
-        LeituraArquivo arqGerente = new LeituraArquivo();
-        ArrayList<Gerente> gerentes = arqGerente.lerArquivoGerente("C:\\DadosGerente.txt");
+        ArrayList<Gerente> gerentes = leituraArquivo.lerArquivoGerente("C:\\DadosGerente.txt");
 
-        LeituraArquivo arqCliente = new LeituraArquivo();
-        ArrayList<Cliente> clientes = arqCliente.lerArquivoCliente("C:\\DadosCliente.txt");
+        ArrayList<Cliente> clientes = leituraArquivo.lerArquivoCliente("C:\\DadosCliente.txt");
+
+        ArrayList<Carro> carros = leituraArquivo.lerArquivoCarro("C:\\DadosCarro.txt");
+
+        ArrayList<Moto> motos = leituraArquivo.lerArquivoMoto("C:\\DadosMoto.txt");
 
 
         Cliente cliente1 = new Cliente("João Silva", "123.456.789-00", "Rua A, 123", "99999-9999", 150);

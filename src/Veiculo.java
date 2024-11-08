@@ -5,6 +5,8 @@ public abstract class Veiculo {
     private int ano;
     private boolean disponivelParaVenda; 
 
+    public Veiculo() {}
+
     public Veiculo(String marca, String modelo, double preco, int ano, boolean disponivelParaVenda) {
         this.marca = marca;
         this.modelo = modelo;
