@@ -27,8 +27,11 @@ public abstract class Veiculo {
     public int getAno() { return ano; }
     public void setAno(int ano) { this.ano = ano; }
 
-    public boolean isDisponivelParaVenda() { return disponivelParaVenda; }
-    public void setDisponivelParaVenda(boolean disponivelParaVenda) { this.disponivelParaVenda = disponivelParaVenda; }
+    public boolean isDisponivelParaVenda() {
+        return disponivelParaVenda; }
+
+    public void setDisponivelParaVenda(boolean disponivelParaVenda) {
+        this.disponivelParaVenda = disponivelParaVenda; }
 
     public abstract void mostrarInfo();
 }

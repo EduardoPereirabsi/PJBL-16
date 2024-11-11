@@ -1,6 +1,12 @@
 import javax.swing.*;
 
 public class InterfacePrincipal {
-    private JTextField textField1;
-    private JButton button1;
+    private JTextField textNome;
+    private JButton btnClick;
+    private JLabel Senha;
+    private JPasswordField passwordField1;
+    private JPasswordField TextSenha;
+
+
+                       
 }
