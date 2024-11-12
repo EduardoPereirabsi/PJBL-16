@@ -141,30 +141,4 @@ public class LeituraArquivo {
             throw new RuntimeException(e);
         }
     }
-    public ArrayList<Fabricante> lerArquivoFabricante(String caminhoArquivo) {
-        try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
-            String linha;
-
-            ArrayList<Fabricante> fabricantes = new ArrayList<Fabricante>();
-
-            while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split("\\|");
-
-                if (dados.length == 5) {
-                    Fabricante fabricante = new Fabricante();
-                    fabricante.setNome(dados[0]);
-                    fabricante.setCnpj(dados[1]);
-                    fabricante.setEndereco(dados[2]);
-                    fabricante.setTelefone(dados[3]);
-                    fabricante.setEmail(dados[4]);
-                    fabricantes.add(fabricante);
-                } else {
-                    System.out.println("Dados incompletos na linha: " + linha);
-                }
-            }
-            return fabricantes;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

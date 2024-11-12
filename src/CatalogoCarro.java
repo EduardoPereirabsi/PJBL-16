@@ -18,7 +18,7 @@ public class CatalogoCarro extends JFrame {
         setLocationRelativeTo(null);
 
         // Configurando a tabela
-        modeloTabela = new DefaultTableModel(new String[]{"Modelo", "Ano", "Preço", "Fabricante"}, 0);
+        modeloTabela = new DefaultTableModel(new String[]{"Modelo", "Ano", "Preço", "Em Haver"}, 0);
         tabelaCarros = new JTable(modeloTabela);
 
         // Painel de entrada de dados
@@ -37,7 +37,7 @@ public class CatalogoCarro extends JFrame {
         campoPreco = new JTextField();
         painelEntrada.add(campoPreco);
 
-        painelEntrada.add(new JLabel("Fabricante:"));
+        painelEntrada.add(new JLabel("Em Haver:"));
         campoFabricante = new JTextField();
         painelEntrada.add(campoFabricante);
 
@@ -98,7 +98,7 @@ public class CatalogoCarro extends JFrame {
         LeituraArquivo leituraArquivo = new LeituraArquivo();
         ArrayList<Carro> carros = leituraArquivo.lerArquivoCarro("C:\\DadosCarro.txt");
         for (Carro carro : carros) {
-            modeloTabela.addRow(new Object[]{carro.getModelo(), carro.getAno(), carro.getPreco(),carro.getFabricante()});
+            modeloTabela.addRow(new Object[]{carro.getModelo(), carro.getAno(), carro.getPreco(),"em Haver"});
         }
     }
 }
