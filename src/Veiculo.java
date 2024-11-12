@@ -15,6 +15,9 @@ public abstract class Veiculo {
         this.disponivelParaVenda = disponivelParaVenda;
     }
 
+    public Veiculo(String marca, String modelo, double preco, int ano, boolean disponivelParaVenda, String fabricante) {
+    }
+
     public String getMarca() { return marca; }
     public void setMarca(String marca) { this.marca = marca; }
 

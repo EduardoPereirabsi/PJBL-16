@@ -3,6 +3,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class CatalogoCarro extends JFrame {
     private JTable tabelaCarros;
@@ -51,6 +52,8 @@ public class CatalogoCarro extends JFrame {
         add(new JScrollPane(tabelaCarros), BorderLayout.CENTER);
         add(painelEntrada, BorderLayout.SOUTH);
 
+        inicializaRegistros();
+
         // Ação do botão adicionar
         btnAdicionar.addActionListener(new ActionListener() {
             @Override
@@ -91,12 +94,11 @@ public class CatalogoCarro extends JFrame {
         campoFabricante.setText("");
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new CatalogoCarro().setVisible(true);
-            }
-        });
+    private void inicializaRegistros(){
+        LeituraArquivo leituraArquivo = new LeituraArquivo();
+        ArrayList<Carro> carros = leituraArquivo.lerArquivoCarro("C:\\DadosCarro.txt");
+        for (Carro carro : carros) {
+            modeloTabela.addRow(new Object[]{carro.getModelo(), carro.getAno(), carro.getPreco(),carro.getFabricante()});
+        }
     }
 }
