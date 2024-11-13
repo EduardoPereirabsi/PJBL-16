@@ -110,8 +110,9 @@ public class CatalogoCarro extends JFrame {
             String modelo = campoModelo.getText();
             String ano = campoAno.getText();
             String preco = campoPreco.getText();
+            String marca = campoMarca.getText();
 
-            modeloTabela.addRow(new Object[]{modelo, ano, preco});
+            modeloTabela.addRow(new Object[]{modelo, ano, preco, marca});
         }
         limparCampos();
     }

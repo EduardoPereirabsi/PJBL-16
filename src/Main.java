@@ -1,6 +1,8 @@
 import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
+
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -14,6 +16,10 @@ public class Main {
         ArrayList<Carro> carros = leituraArquivo.lerArquivoCarro("C:\\DadosCarro.txt");
 
         ArrayList<Moto> motos = leituraArquivo.lerArquivoMoto("C:\\DadosMoto.txt");
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\Gp\\Gpt.txt"))){
+            bw.write("Pai");
+        }
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override

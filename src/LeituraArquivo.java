@@ -1,5 +1,7 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class LeituraArquivo {
@@ -110,6 +112,20 @@ public class LeituraArquivo {
                 }
             }
             return carros;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void salvarArquivoCarro(String caminhoArquivo, ArrayList<Carro> carros) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminhoArquivo))) {
+            for (Carro carro : carros) {
+                bw.write(carro.getMarca() + "|" +
+                        carro.getModelo() + "|" +
+                        carro.getPreco() + "|" +
+                        carro.getAno() + "|" +
+                        carro.getNumeroPortas());
+                bw.newLine();
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
