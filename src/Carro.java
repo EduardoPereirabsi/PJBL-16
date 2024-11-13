@@ -2,7 +2,6 @@ public class Carro extends Veiculo {
     private int numeroPortas;
     private boolean temArCondicionado;
     public Carro() {
-
     }
 
     public Carro(String marca, String modelo, double preco, int ano, boolean disponivelParaVenda, int numeroPortas, boolean temArCondicionado) {

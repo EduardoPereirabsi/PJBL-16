@@ -8,17 +8,17 @@ import java.util.ArrayList;
 public class CatalogoCarro extends JFrame {
     private JTable tabelaCarros;
     private DefaultTableModel modeloTabela;
-    private JTextField campoModelo, campoAno, campoPreco, campoFabricante;
+    private JTextField campoModelo, campoAno, campoPreco, campoMarca;
     private JButton btnAdicionar, btnRemover;
 
     public CatalogoCarro() {
-        setTitle("Catálogo de Carros");
+        setTitle("Catálogo de Veiculos");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         // Configurando a tabela
-        modeloTabela = new DefaultTableModel(new String[]{"Modelo", "Ano", "Preço", "Em Haver"}, 0);
+        modeloTabela = new DefaultTableModel(new String[]{"Modelo", "Ano", "Preço", "Marca"}, 0);
         tabelaCarros = new JTable(modeloTabela);
 
         // Painel de entrada de dados
@@ -37,9 +37,9 @@ public class CatalogoCarro extends JFrame {
         campoPreco = new JTextField();
         painelEntrada.add(campoPreco);
 
-        painelEntrada.add(new JLabel("Em Haver:"));
-        campoFabricante = new JTextField();
-        painelEntrada.add(campoFabricante);
+        painelEntrada.add(new JLabel("Marca:"));
+        campoMarca = new JTextField();
+        painelEntrada.add(campoMarca);
 
         // Botões de adicionar e remover
         btnAdicionar = new JButton("Adicionar");
@@ -58,17 +58,7 @@ public class CatalogoCarro extends JFrame {
         btnAdicionar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String modelo = campoModelo.getText();
-                String ano = campoAno.getText();
-                String preco = campoPreco.getText();
-                String fabricante = campoFabricante.getText();
-
-                if (!modelo.isEmpty() && !ano.isEmpty() && !preco.isEmpty() && !fabricante.isEmpty()) {
-                    modeloTabela.addRow(new Object[]{modelo, ano, preco, fabricante});
-                    limparCampos();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
-                }
+                adicionarVeiculo();
             }
         });
 
@@ -76,29 +66,61 @@ public class CatalogoCarro extends JFrame {
         btnRemover.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int linhaSelecionada = tabelaCarros.getSelectedRow();
-                if (linhaSelecionada != -1) {
-                    modeloTabela.removeRow(linhaSelecionada);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Selecione um carro para remover.");
-                }
+                removerVeiculo();
             }
         });
     }
 
-    // Método para limpar os campos de entrada
     private void limparCampos() {
         campoModelo.setText("");
         campoAno.setText("");
         campoPreco.setText("");
-        campoFabricante.setText("");
+        campoMarca.setText("");
     }
 
     private void inicializaRegistros(){
         LeituraArquivo leituraArquivo = new LeituraArquivo();
         ArrayList<Carro> carros = leituraArquivo.lerArquivoCarro("C:\\DadosCarro.txt");
         for (Carro carro : carros) {
-            modeloTabela.addRow(new Object[]{carro.getModelo(), carro.getAno(), carro.getPreco(),"em Haver"});
+            modeloTabela.addRow(new Object[]{carro.getModelo(), carro.getAno(), carro.getPreco(),carro.getMarca()});
+        }
+    }
+    private boolean validarCadastro(){
+        boolean erro = false;
+        if (campoModelo.getText() == null || campoModelo.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Modelo Obrigatório!", null, JOptionPane.INFORMATION_MESSAGE);
+            erro = true;
+        }
+        if (campoAno.getText() == null || campoAno.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Ano Obrigatório!", null, JOptionPane.INFORMATION_MESSAGE);
+            erro = true;
+        }
+        if (campoPreco.getText() == null || campoPreco.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Preço Obrigatório!", null, JOptionPane.INFORMATION_MESSAGE);
+            erro = true;
+        }
+        if (campoAno.getText() == null || campoMarca.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Marca Obrigatório!", null, JOptionPane.INFORMATION_MESSAGE);
+            erro = true;
+        }
+        return erro;
+    }
+    private void adicionarVeiculo(){
+        if (!validarCadastro()){
+            String modelo = campoModelo.getText();
+            String ano = campoAno.getText();
+            String preco = campoPreco.getText();
+
+            modeloTabela.addRow(new Object[]{modelo, ano, preco});
+        }
+        limparCampos();
+    }
+    private void removerVeiculo(){
+        int linhaSelecionada = tabelaCarros.getSelectedRow();
+        if (linhaSelecionada != -1) {
+            modeloTabela.removeRow(linhaSelecionada);
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um carro para remover.");
         }
     }
 }
