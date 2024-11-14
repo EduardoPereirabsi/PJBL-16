@@ -111,6 +111,13 @@ public class CatalogoCarro extends JFrame {
             String ano = campoAno.getText();
             String preco = campoPreco.getText();
             String marca = campoMarca.getText();
+            Double precoNumber = Double.parseDouble(preco);
+            Integer anoNumber = Integer.parseInt(ano);
+
+            LeituraArquivo leituraArquivo = new LeituraArquivo();
+
+            Carro carro = new Carro(marca,modelo, precoNumber, anoNumber );
+            leituraArquivo.salvarArquivoCarro("C:\\DadosCarro.txt", carro);
 
             modeloTabela.addRow(new Object[]{modelo, ano, preco, marca});
         }

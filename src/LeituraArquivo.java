@@ -116,16 +116,13 @@ public class LeituraArquivo {
             throw new RuntimeException(e);
         }
     }
-    public void salvarArquivoCarro(String caminhoArquivo, ArrayList<Carro> carros) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminhoArquivo))) {
-            for (Carro carro : carros) {
+    public void salvarArquivoCarro(String caminhoArquivo, Carro carro) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminhoArquivo, true))) {
                 bw.write(carro.getMarca() + "|" +
                         carro.getModelo() + "|" +
                         carro.getPreco() + "|" +
-                        carro.getAno() + "|" +
-                        carro.getNumeroPortas());
+                        carro.getAno());
                 bw.newLine();
-            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

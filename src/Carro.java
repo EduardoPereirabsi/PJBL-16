@@ -9,6 +9,11 @@ public class Carro extends Veiculo {
         this.numeroPortas = numeroPortas;
         this.temArCondicionado = temArCondicionado;
     }
+    
+
+    public Carro(String marca, String modelo, double preco, int ano) {
+        super(marca, modelo, preco, ano);
+    }
 
 
     public int getNumeroPortas() {
