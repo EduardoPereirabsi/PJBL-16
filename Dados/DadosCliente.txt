@@ -1,0 +1,6 @@
+Jose|00055533329|Rua Marte|99888-7766
+Camila Silva|10055544430|Rua dos Lírios|99777-6655|
+Rafael Lima|20066655541|Avenida das Nações|99666-5544|
+Beatriz Santos|30077766652|Rua Esperança|99555-4433|
+Fernando Costa|40088877763|Praça Central|99444-3322|
+Larissa Nunes|50099988874|Avenida Liberdade|99333-2211|

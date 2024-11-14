@@ -1,0 +1,6 @@
+Honda|Hornet|23000|2012|
+Yamaha|Fazer 250|15000|2015|
+Suzuki|Yes 125|7000|2008|
+BMW|G 310 GS|25000|2020|
+Kawasaki|Ninja 300|27000|2016|
+Dafra|Citycom 300|18000|2017|

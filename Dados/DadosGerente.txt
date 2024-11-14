@@ -1,0 +1,7 @@
+Antonio Ferraz |5000003234|Rua David|94484-6554|2500
+Paloma Paz|3010101010|Rua Eduardo|99793-4567|4550
+Carlos Almeida|3022233344|Rua das Flores|98877-1122|3200
+Fernanda Souza|4001122233|Avenida Central|98765-4433|3800
+Roberto Silva|5009988776|Rua Nova|95566-7788|4100
+Luciana Castro|4011122233|Rua do Sol|97654-3344|4700
+Marcelo Teixeira|5033344556|Avenida das Árvores|94433-2211|3600
