@@ -16,9 +16,7 @@ public class Main {
 
         ArrayList<Moto> motos = leituraArquivo.lerArquivoMoto("C:\\DadosMoto.txt");
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\55419\\Verde.txt"))){
-            bw.write("VERDE GREEN");
-        }
+
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -31,7 +29,7 @@ public class Main {
         Vendedor vendedor1 = new Vendedor("Carlos Santos", "111.222.333-44", "Rua C, 789", 5.5, 20, "98888-8888");
 
         Veiculo carro1 = new Carro("Toyota", "Corolla", 95000.00, 2021);
-        Veiculo moto1 = new Moto("Honda", "CB 500", 30000.00, 2022, false, "Esportiva", true);
+        Veiculo moto1 = new Moto("Honda", "CB 500", 30000.00, 2022, false, "Esportiva", true, "aASSADDAS");
 
         Venda venda1 = new Venda(vendedor1, cliente1, carro1, carro1.getPreco(), new Date());
 

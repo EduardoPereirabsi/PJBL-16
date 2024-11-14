@@ -6,8 +6,8 @@ public class Moto extends Veiculo {
         super();
     }
 
-    public Moto(String marca, String modelo, double preco, int ano, boolean disponivelParaVenda, String tipo, boolean temABS) {
-        super(marca, modelo, preco, ano, disponivelParaVenda);
+    public Moto(String marca, String modelo, double preco, int ano, boolean disponivelParaVenda, String tipo, boolean temABS, String placa) {
+        super(marca, modelo, preco, ano, placa, disponivelParaVenda);
         this.tipo = tipo;
         this.temABS = temABS;
     }

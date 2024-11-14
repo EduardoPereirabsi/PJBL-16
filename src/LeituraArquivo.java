@@ -2,7 +2,11 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LeituraArquivo {
 
@@ -97,12 +101,14 @@ public class LeituraArquivo {
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split("\\|");
 
-                if (dados.length == 5) {
+                if (dados.length == 6) {
                     Carro carro = new Carro();
                     carro.setMarca(dados[0]);
                     carro.setModelo(dados[1]);
-                    carro.setPreco(Double.parseDouble(dados[2]));
-                    carro.setAno(Integer.parseInt(dados[3]));
+                    carro.setAno(Integer.parseInt(dados[2]));
+                    carro.setPreco(Double.parseDouble(dados[3]));
+                    carro.setPlaca(dados[4]);
+                    carro.setNumPortas(Integer.parseInt(dados[5]));
                     carros.add(carro);
 
                 } else {
@@ -118,11 +124,32 @@ public class LeituraArquivo {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminhoArquivo, true))) {
                 bw.write(carro.getMarca() + "|" +
                         carro.getModelo() + "|" +
+                        carro.getAno() + "|" +
                         carro.getPreco() + "|" +
-                        carro.getAno());
+                        carro.getPlaca() + "|" +
+                        carro.getNumPortas());
+
                 bw.newLine();
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+    public void removerLinhas(String caminhoArquivo, String placa) {
+        try {
+            List<String> linhas = Files.readAllLines(Paths.get(caminhoArquivo));
+
+            List<String> linhasFiltradas = new ArrayList<>();
+            for (String linha : linhas) {
+                if (!linha.contains(placa)) {
+                    linhasFiltradas.add(linha);
+                }
+            }
+
+            Files.write(Paths.get(caminhoArquivo), linhasFiltradas);
+
+
+        } catch (Exception e) {
+            System.out.println("Erro ao processar o arquivo: " + e.getMessage());
         }
     }
     public ArrayList<Moto> lerArquivoMoto(String caminhoArquivo) {

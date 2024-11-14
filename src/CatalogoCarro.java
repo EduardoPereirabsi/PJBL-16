@@ -8,48 +8,83 @@ import java.util.ArrayList;
 public class CatalogoCarro extends JFrame {
     private JTable tabelaCarros;
     private DefaultTableModel modeloTabela;
-    private JTextField campoModelo, campoAno, campoPreco, campoMarca;
+    private JTextField campoMarca, campoModelo, campoAno, campoPreco, campoNumPortas, campoPlaca;
     private JButton btnAdicionar, btnRemover;
     public JPanel panel1;
 
     public CatalogoCarro() {
-        setTitle("Catálogo de Veiculos");
-        setSize(600, 400);
+        setTitle("Catálogo de Veículos");
+        setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         // Configurando a tabela
-        modeloTabela = new DefaultTableModel(new String[]{"Marca","Modelo", "Ano", "Preço"}, 0);
+        modeloTabela = new DefaultTableModel(new String[]{"Marca", "Modelo", "Ano", "Preço", "Placa", "Número de Portas"}, 0);
         tabelaCarros = new JTable(modeloTabela);
 
-        // Painel de entrada de dados
-        JPanel painelEntrada = new JPanel();
-        painelEntrada.setLayout(new GridLayout(5, 2, 5, 5));
+        // Painel de entrada de dados com GridBagLayout
+        JPanel painelEntrada = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 5, 5, 5);
 
-        painelEntrada.add(new JLabel("Marca:"));
+        // Definindo tamanho padrão para os campos de texto
+        Dimension tamanhoCampo = new Dimension(150, 25);
+
+        // Linha 1 - Marca e Modelo
+        gbc.gridx = 0; gbc.gridy = 0;
+        painelEntrada.add(new JLabel("Marca:"), gbc);
         campoMarca = new JTextField();
-        painelEntrada.add(campoMarca);
+        campoMarca.setPreferredSize(tamanhoCampo);
+        gbc.gridx = 1;
+        painelEntrada.add(campoMarca, gbc);
 
-        painelEntrada.add(new JLabel("Modelo:"));
+        gbc.gridx = 2;
+        painelEntrada.add(new JLabel("Modelo:"), gbc);
         campoModelo = new JTextField();
-        painelEntrada.add(campoModelo);
+        campoModelo.setPreferredSize(tamanhoCampo);
+        gbc.gridx = 3;
+        painelEntrada.add(campoModelo, gbc);
 
-        painelEntrada.add(new JLabel("Ano:"));
+        // Linha 2 - Ano e Preço
+        gbc.gridx = 0; gbc.gridy = 1;
+        painelEntrada.add(new JLabel("Ano:"), gbc);
         campoAno = new JTextField();
-        painelEntrada.add(campoAno);
+        campoAno.setPreferredSize(tamanhoCampo);
+        gbc.gridx = 1;
+        painelEntrada.add(campoAno, gbc);
 
-        painelEntrada.add(new JLabel("Preço:"));
+        gbc.gridx = 2;
+        painelEntrada.add(new JLabel("Preço:"), gbc);
         campoPreco = new JTextField();
-        painelEntrada.add(campoPreco);
+        campoPreco.setPreferredSize(tamanhoCampo);
+        gbc.gridx = 3;
+        painelEntrada.add(campoPreco, gbc);
 
+        // Linha 3 - Placa e Número de Portas
+        gbc.gridx = 0; gbc.gridy = 2;
+        painelEntrada.add(new JLabel("Placa:"), gbc);
+        campoPlaca = new JTextField();
+        campoPlaca.setPreferredSize(tamanhoCampo);
+        gbc.gridx = 1;
+        painelEntrada.add(campoPlaca, gbc);
 
+        gbc.gridx = 2;
+        painelEntrada.add(new JLabel("Número de Portas:"), gbc);
+        campoNumPortas = new JTextField();
+        campoNumPortas.setPreferredSize(tamanhoCampo);
+        gbc.gridx = 3;
+        painelEntrada.add(campoNumPortas, gbc);
 
-        // Botões de adicionar e remover
+        // Linha 4 - Botões Adicionar e Remover
+        JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         btnAdicionar = new JButton("Adicionar");
         btnRemover = new JButton("Remover Selecionado");
+        painelBotoes.add(btnAdicionar);
+        painelBotoes.add(btnRemover);
 
-        painelEntrada.add(btnAdicionar);
-        painelEntrada.add(btnRemover);
+        gbc.gridx = 0; gbc.gridy = 3; gbc.gridwidth = 4;
+        painelEntrada.add(painelBotoes, gbc);
 
         // Configuração do painel principal
         add(new JScrollPane(tabelaCarros), BorderLayout.CENTER);
@@ -75,63 +110,82 @@ public class CatalogoCarro extends JFrame {
     }
 
     private void limparCampos() {
+        campoMarca.setText("");
         campoModelo.setText("");
         campoAno.setText("");
         campoPreco.setText("");
-        campoMarca.setText("");
+        campoNumPortas.setText("");
+        campoPlaca.setText("");
     }
 
-    private void inicializaRegistros(){
+    private void inicializaRegistros() {
         LeituraArquivo leituraArquivo = new LeituraArquivo();
         ArrayList<Carro> carros = leituraArquivo.lerArquivoCarro("C:\\DadosCarro.txt");
         for (Carro carro : carros) {
-            modeloTabela.addRow(new Object[]{carro.getModelo(), carro.getAno(), carro.getPreco(),carro.getMarca()});
+            modeloTabela.addRow(new Object[]{carro.getMarca(), carro.getModelo(), carro.getAno(), carro.getPreco(), carro.getPlaca(), carro.getNumPortas()});
         }
     }
-    private boolean validarCadastro(){
+
+    private boolean validarCadastro() {
         boolean erro = false;
-        if (campoModelo.getText() == null || campoModelo.getText().isEmpty()){
+        if (campoMarca.getText() == null || campoMarca.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo Marca Obrigatório!", null, JOptionPane.INFORMATION_MESSAGE);
+            erro = true;
+        }
+        if (campoModelo.getText() == null || campoModelo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo Modelo Obrigatório!", null, JOptionPane.INFORMATION_MESSAGE);
             erro = true;
         }
-        if (campoAno.getText() == null || campoAno.getText().isEmpty()){
+        if (campoAno.getText() == null || campoAno.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo Ano Obrigatório!", null, JOptionPane.INFORMATION_MESSAGE);
             erro = true;
         }
-        if (campoPreco.getText() == null || campoPreco.getText().isEmpty()){
+        if (campoPreco.getText() == null || campoPreco.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo Preço Obrigatório!", null, JOptionPane.INFORMATION_MESSAGE);
             erro = true;
         }
-        if (campoAno.getText() == null || campoMarca.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Campo Marca Obrigatório!", null, JOptionPane.INFORMATION_MESSAGE);
+        if (campoPlaca.getText() == null || campoPlaca.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo Placa Obrigatório!", null, JOptionPane.INFORMATION_MESSAGE);
+            erro = true;
+        }
+        if (campoNumPortas.getText() == null || campoNumPortas.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo Número de Portas Obrigatório!", null, JOptionPane.INFORMATION_MESSAGE);
             erro = true;
         }
         return erro;
     }
-    private void adicionarVeiculo(){
-        if (!validarCadastro()){
+
+    private void adicionarVeiculo() {
+        if (!validarCadastro()) {
             String modelo = campoModelo.getText();
             String ano = campoAno.getText();
             String preco = campoPreco.getText();
             String marca = campoMarca.getText();
+            String placa = campoPlaca.getText();
+            String numPortas = campoNumPortas.getText();
             Double precoNumber = Double.parseDouble(preco);
             Integer anoNumber = Integer.parseInt(ano);
+            Integer numPortasNumber = Integer.parseInt(numPortas);
 
             LeituraArquivo leituraArquivo = new LeituraArquivo();
 
-            Carro carro = new Carro(marca,modelo, precoNumber, anoNumber );
+            Carro carro = new Carro(marca, modelo, precoNumber, anoNumber, placa, true, numPortasNumber);
             leituraArquivo.salvarArquivoCarro("C:\\DadosCarro.txt", carro);
 
-            modeloTabela.addRow(new Object[]{modelo, ano, preco, marca});
+            modeloTabela.addRow(new Object[]{marca, modelo, ano, preco, placa, numPortasNumber});
+            limparCampos();
         }
-        limparCampos();
     }
-    private void removerVeiculo(){
+
+    private void removerVeiculo() {
         int linhaSelecionada = tabelaCarros.getSelectedRow();
         if (linhaSelecionada != -1) {
+            LeituraArquivo leituraArquivo = new LeituraArquivo();
+            Object valorCelula = tabelaCarros.getValueAt(linhaSelecionada, 4);
+            leituraArquivo.removerLinhas("C:\\DadosCarro.txt",valorCelula.toString());
             modeloTabela.removeRow(linhaSelecionada);
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione um carro para remover.");
+            JOptionPane.showMessageDialog(null, "Selecione um Veículo para remover.");
         }
     }
 
@@ -143,5 +197,11 @@ public class CatalogoCarro extends JFrame {
         frame.setResizable(false);
         frame.setSize(500, 300);
         frame.setVisible(true);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new CatalogoCarro().setVisible(true);
+            }
+        });
     }
 }
