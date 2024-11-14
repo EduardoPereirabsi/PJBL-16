@@ -10,6 +10,10 @@ public class Funcionario extends Usuario {
         this.salario = salario;
     }
 
+    public Funcionario(String nome, String cpf, String endereco, String telefone) {
+        super(nome, cpf, endereco, telefone);
+    }
+
     public double getSalario() {
         return salario;
     }

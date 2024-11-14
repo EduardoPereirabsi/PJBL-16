@@ -152,6 +152,37 @@ public class LeituraArquivo {
             System.out.println("Erro ao processar o arquivo: " + e.getMessage());
         }
     }
+    public void salvarDadosFuncionarioEmArquivo(String caminhoArquivo, Funcionario funcionario) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminhoArquivo, true))) {
+            bw.write(funcionario.getNome() + "|" +
+                    funcionario.getCpf() + "|" +
+                    funcionario.getEndereco() + "|" +
+                    funcionario.getTelefone());
+
+            bw.newLine();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void removerLinhasArquivoFuncionario(String caminhoArquivo, String cpf) {
+        try {
+            List<String> linhas = Files.readAllLines(Paths.get(caminhoArquivo));
+
+            List<String> linhasFiltradas = new ArrayList<>();
+            for (String linha : linhas) {
+                if (!linha.contains(cpf)) {
+                    linhasFiltradas.add(linha);
+                }
+            }
+
+            Files.write(Paths.get(caminhoArquivo), linhasFiltradas);
+
+
+        } catch (Exception e) {
+            System.out.println("Erro ao processar o arquivo: " + e.getMessage());
+        }
+    }
+
     public ArrayList<Moto> lerArquivoMoto(String caminhoArquivo) {
         try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
             String linha;

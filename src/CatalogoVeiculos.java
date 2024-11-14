@@ -5,33 +5,40 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class CatalogoCarro extends JFrame {
-    private JTable tabelaCarros;
+public class CatalogoVeiculos extends JFrame {
+    private JTable tabelaVeiculos;
     private DefaultTableModel modeloTabela;
     private JTextField campoMarca, campoModelo, campoAno, campoPreco, campoNumPortas, campoPlaca;
     private JButton btnAdicionar, btnRemover;
     public JPanel panel1;
+    private DefaultTableModel modeloTabelaFuncionario;
 
-    public CatalogoCarro() {
+    // Campos Cadastro Usuario
+    private JTextField campoNome, campoCpf, campoEndereco, campoTelefone;
+    private JButton btnSalvarFuncionario;
+    private JTable tabelaFuncionario;
+    private JButton btnRemoverFuncionario;
+
+
+    public CatalogoVeiculos() {
         setTitle("Catálogo de Veículos");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Configurando a tabela
         modeloTabela = new DefaultTableModel(new String[]{"Marca", "Modelo", "Ano", "Preço", "Placa", "Número de Portas"}, 0);
-        tabelaCarros = new JTable(modeloTabela);
+        tabelaVeiculos = new JTable(modeloTabela);
 
-        // Painel de entrada de dados com GridBagLayout
+        modeloTabelaFuncionario = new DefaultTableModel(new String[]{"Nome", "Cpf", "Endereço", "Telefone"}, 0);
+        tabelaFuncionario = new JTable(modeloTabelaFuncionario);
+
         JPanel painelEntrada = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        // Definindo tamanho padrão para os campos de texto
         Dimension tamanhoCampo = new Dimension(150, 25);
 
-        // Linha 1 - Marca e Modelo
         gbc.gridx = 0; gbc.gridy = 0;
         painelEntrada.add(new JLabel("Marca:"), gbc);
         campoMarca = new JTextField();
@@ -46,7 +53,6 @@ public class CatalogoCarro extends JFrame {
         gbc.gridx = 3;
         painelEntrada.add(campoModelo, gbc);
 
-        // Linha 2 - Ano e Preço
         gbc.gridx = 0; gbc.gridy = 1;
         painelEntrada.add(new JLabel("Ano:"), gbc);
         campoAno = new JTextField();
@@ -61,7 +67,6 @@ public class CatalogoCarro extends JFrame {
         gbc.gridx = 3;
         painelEntrada.add(campoPreco, gbc);
 
-        // Linha 3 - Placa e Número de Portas
         gbc.gridx = 0; gbc.gridy = 2;
         painelEntrada.add(new JLabel("Placa:"), gbc);
         campoPlaca = new JTextField();
@@ -76,7 +81,6 @@ public class CatalogoCarro extends JFrame {
         gbc.gridx = 3;
         painelEntrada.add(campoNumPortas, gbc);
 
-        // Linha 4 - Botões Adicionar e Remover
         JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         btnAdicionar = new JButton("Adicionar");
         btnRemover = new JButton("Remover Selecionado");
@@ -86,13 +90,13 @@ public class CatalogoCarro extends JFrame {
         gbc.gridx = 0; gbc.gridy = 3; gbc.gridwidth = 4;
         painelEntrada.add(painelBotoes, gbc);
 
-        // Configuração do painel principal
-        add(new JScrollPane(tabelaCarros), BorderLayout.CENTER);
+       // painelEntrada.add(tabelaFuncionario);
+
+        add(new JScrollPane(tabelaVeiculos), BorderLayout.CENTER);
         add(painelEntrada, BorderLayout.SOUTH);
 
         inicializaRegistros();
 
-        // Ação do botão adicionar
         btnAdicionar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -100,14 +104,26 @@ public class CatalogoCarro extends JFrame {
             }
         });
 
-        // Ação do botão remover
         btnRemover.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 removerVeiculo();
             }
         });
+        btnSalvarFuncionario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                adicionarFuncionario();
+            }
+        });
+        btnRemoverFuncionario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removerFuncionario();
+            }
+        });
     }
+
 
     private void limparCampos() {
         campoMarca.setText("");
@@ -126,7 +142,7 @@ public class CatalogoCarro extends JFrame {
         }
     }
 
-    private boolean validarCadastro() {
+    private boolean validarCadastroCarro() {
         boolean erro = false;
         if (campoMarca.getText() == null || campoMarca.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo Marca Obrigatório!", null, JOptionPane.INFORMATION_MESSAGE);
@@ -156,7 +172,7 @@ public class CatalogoCarro extends JFrame {
     }
 
     private void adicionarVeiculo() {
-        if (!validarCadastro()) {
+        if (!validarCadastroCarro()) {
             String modelo = campoModelo.getText();
             String ano = campoAno.getText();
             String preco = campoPreco.getText();
@@ -178,20 +194,67 @@ public class CatalogoCarro extends JFrame {
     }
 
     private void removerVeiculo() {
-        int linhaSelecionada = tabelaCarros.getSelectedRow();
+        int linhaSelecionada = tabelaVeiculos.getSelectedRow();
         if (linhaSelecionada != -1) {
             LeituraArquivo leituraArquivo = new LeituraArquivo();
-            Object valorCelula = tabelaCarros.getValueAt(linhaSelecionada, 4);
+            Object valorCelula = tabelaVeiculos.getValueAt(linhaSelecionada, 4);
             leituraArquivo.removerLinhas("C:\\DadosCarro.txt",valorCelula.toString());
             modeloTabela.removeRow(linhaSelecionada);
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um Veículo para remover.");
         }
     }
+    private boolean validarCadastroFuncionario() {
+        boolean erro = false;
+        if (campoNome.getText() == null || campoNome.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo Nome Obrigatório!", null, JOptionPane.INFORMATION_MESSAGE);
+            erro = true;
+        }
+        if (campoCpf.getText() == null || campoCpf.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo Cpf Obrigatório!", null, JOptionPane.INFORMATION_MESSAGE);
+            erro = true;
+        }
+        if (campoEndereco.getText() == null || campoEndereco.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo Endereço Obrigatório!", null, JOptionPane.INFORMATION_MESSAGE);
+            erro = true;
+        }
+        if (campoTelefone.getText() == null || campoTelefone.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo Telefone Obrigatório!", null, JOptionPane.INFORMATION_MESSAGE);
+            erro = true;
+        }
+        return erro;
+    }
+    private void adicionarFuncionario() {
+        if (!validarCadastroFuncionario()) {
+            String nome = campoNome.getText();
+            String cpf = campoCpf.getText();
+            String endereco = campoEndereco.getText();
+            String telefone = campoTelefone.getText();
+
+            LeituraArquivo leituraArquivo = new LeituraArquivo();
+
+            Funcionario funcionario = new Funcionario(nome, cpf, endereco, telefone);
+            leituraArquivo.salvarDadosFuncionarioEmArquivo("C:\\DadosFuncionario.txt", funcionario);
+
+            modeloTabelaFuncionario.addRow(new Object[]{nome, cpf, endereco, telefone});
+            limparCampos();
+        }
+    }
+    private void removerFuncionario() {
+        int linhaSelecionada = tabelaFuncionario.getSelectedRow();
+        if (linhaSelecionada != -1) {
+            LeituraArquivo leituraArquivo = new LeituraArquivo();
+            Object valorCelula = tabelaFuncionario.getValueAt(linhaSelecionada, 1);
+            leituraArquivo.removerLinhas("C:\\DadosFuncionario.txt",valorCelula.toString());
+            modeloTabela.removeRow(linhaSelecionada);
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um Funcionario para remover.");
+        }
+    }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Secretario");
-        frame.setContentPane(new CatalogoCarro().panel1);
+        JFrame frame = new JFrame(".");
+        frame.setContentPane(new CatalogoVeiculos().panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setResizable(false);
@@ -200,8 +263,13 @@ public class CatalogoCarro extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new CatalogoCarro().setVisible(true);
+                new CatalogoVeiculos().setVisible(true);
             }
         });
     }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
 }
+
