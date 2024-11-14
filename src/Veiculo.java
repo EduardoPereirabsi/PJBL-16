@@ -14,6 +14,12 @@ public abstract class Veiculo {
         this.ano = ano;
         this.disponivelParaVenda = disponivelParaVenda;
     }
+    public Veiculo(String marca, String modelo, double preco, int ano) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.preco = preco;
+        this.ano = ano;
+    }
 
     public Veiculo(String marca, String modelo, double preco, int ano, boolean disponivelParaVenda, String fabricante) {
     }
