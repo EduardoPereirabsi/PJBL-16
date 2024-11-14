@@ -12,8 +12,13 @@ public class Cliente extends Usuario {
     }
 
 
-    public int getPontosFidelidade() { return pontosFidelidade; }
-    public void adicionarPontos(int pontos) { this.pontosFidelidade += pontos; }
+    public int getPontosFidelidade() {
+        return pontosFidelidade;
+    }
+
+    public void adicionarPontos(int pontos) {
+        this.pontosFidelidade += pontos;
+    }
 
 
     @Override

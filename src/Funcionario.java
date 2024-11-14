@@ -20,6 +20,7 @@ public class Funcionario extends Usuario {
 
     @Override
     public void mostrarInfo() {
-        System.out.println("Cliente: " + getNome() + ", CPF: " + getCpf() + ", Telefone: " + getTelefone() + ", Salario: " + getSalario());
+        System.out.println("Cliente: " + getNome() + ", CPF: " + getCpf() +
+                ", Telefone: " + getTelefone() + ", Salario: " + getSalario());
     }
 }

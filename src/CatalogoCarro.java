@@ -10,6 +10,7 @@ public class CatalogoCarro extends JFrame {
     private DefaultTableModel modeloTabela;
     private JTextField campoModelo, campoAno, campoPreco, campoMarca;
     private JButton btnAdicionar, btnRemover;
+    public JPanel panel1;
 
     public CatalogoCarro() {
         setTitle("Catálogo de Veiculos");
@@ -123,5 +124,15 @@ public class CatalogoCarro extends JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um carro para remover.");
         }
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Secretario");
+        frame.setContentPane(new CatalogoCarro().panel1);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setResizable(false);
+        frame.setSize(500, 300);
+        frame.setVisible(true);
     }
 }

@@ -12,6 +12,7 @@ public class Carro extends Veiculo {
 
 
     public int getNumeroPortas() {
+
         return numeroPortas;
     }
 
@@ -20,6 +21,7 @@ public class Carro extends Veiculo {
     }
 
     public boolean isTemArCondicionado() {
+
         return temArCondicionado;
     }
 

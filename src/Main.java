@@ -17,8 +17,8 @@ public class Main {
 
         ArrayList<Moto> motos = leituraArquivo.lerArquivoMoto("C:\\DadosMoto.txt");
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\Gp\\Gpt.txt"))){
-            bw.write("Pai");
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\55419\\Verde.txt"))){
+            bw.write("VERDE GREEN");
         }
 
         SwingUtilities.invokeLater(new Runnable() {
