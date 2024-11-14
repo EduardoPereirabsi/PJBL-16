@@ -30,8 +30,8 @@ public class Main {
         Cliente cliente1 = new Cliente("João Silva", "123.456.789-00", "Rua A, 123", "99999-9999", 150);
         Vendedor vendedor1 = new Vendedor("Carlos Santos", "111.222.333-44", "Rua C, 789", 5.5, 20, "98888-8888");
 
-        Veiculo carro1 = new Carro("Toyota", "Corolla", 95000.00, 2021, true, 4, true);
-        Veiculo moto1 = new Moto("Honda", "CB 500", 30000.00, 2022, true, "Esportiva", true);
+        Veiculo carro1 = new Carro("Toyota", "Corolla", 95000.00, 2021);
+        Veiculo moto1 = new Moto("Honda", "CB 500", 30000.00, 2022, false, "Esportiva", true);
 
         Venda venda1 = new Venda(vendedor1, cliente1, carro1, carro1.getPreco(), new Date());
 

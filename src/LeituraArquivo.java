@@ -103,8 +103,6 @@ public class LeituraArquivo {
                     carro.setModelo(dados[1]);
                     carro.setPreco(Double.parseDouble(dados[2]));
                     carro.setAno(Integer.parseInt(dados[3]));
-                    carro.setNumeroPortas(4);
-                    // carro.setTemArCondicionado(5);
                     carros.add(carro);
 
                 } else {

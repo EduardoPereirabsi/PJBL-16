@@ -18,12 +18,16 @@ public class CatalogoCarro extends JFrame {
         setLocationRelativeTo(null);
 
         // Configurando a tabela
-        modeloTabela = new DefaultTableModel(new String[]{"Modelo", "Ano", "Preço", "Marca"}, 0);
+        modeloTabela = new DefaultTableModel(new String[]{"Marca","Modelo", "Ano", "Preço"}, 0);
         tabelaCarros = new JTable(modeloTabela);
 
         // Painel de entrada de dados
         JPanel painelEntrada = new JPanel();
         painelEntrada.setLayout(new GridLayout(5, 2, 5, 5));
+
+        painelEntrada.add(new JLabel("Marca:"));
+        campoMarca = new JTextField();
+        painelEntrada.add(campoMarca);
 
         painelEntrada.add(new JLabel("Modelo:"));
         campoModelo = new JTextField();
@@ -37,9 +41,7 @@ public class CatalogoCarro extends JFrame {
         campoPreco = new JTextField();
         painelEntrada.add(campoPreco);
 
-        painelEntrada.add(new JLabel("Marca:"));
-        campoMarca = new JTextField();
-        painelEntrada.add(campoMarca);
+
 
         // Botões de adicionar e remover
         btnAdicionar = new JButton("Adicionar");
